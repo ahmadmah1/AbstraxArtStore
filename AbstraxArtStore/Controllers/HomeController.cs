@@ -43,6 +43,21 @@ namespace AbstraxArtStore.Controllers
             return View();
         }
 
+        public IActionResult Smallpaintings()
+        {
+            return View();
+        }
+
+        public IActionResult Mediumpaintings()
+        {
+            return View();
+        }
+
+        public IActionResult Largepaintings()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
