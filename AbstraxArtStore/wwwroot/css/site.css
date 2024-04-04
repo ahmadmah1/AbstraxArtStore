@@ -139,3 +139,13 @@ body {
     .column {
         width: 100%;
     }
+
+
+
+
+
+    .footer {
+        background-color: #258cfb;
+        text-align: center;
+        padding: 10px;
+    }
