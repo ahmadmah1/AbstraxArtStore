@@ -26,17 +26,19 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
-                        <div class="dropdown">
-                            <ul class="navbar-nav flex-grow-1">
-                                <button type="button" class="btn btn dropdown-toggle-" data-bs-toggle="dropdown">
-                                    Buy
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Smallpaintings">Small Paintings</a></li>
-                                    <li><a class="dropdown-item" href="Home/Mediumpaintings">Medium Paintings</a></li>
-                                    <li><a class="dropdown-item" href="Home/Largepaintings">Large Paintings</a></li>
-                                </ul>
-                        </div>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <ul class="navbar-nav flex-grow-1">
+                                    <button type="button" class="btn btn dropdown-toggle text-light" data-bs-toggle="dropdown">
+                                        Buy
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Smallpaintings">Small Paintings</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Mediumpaintings">Medium Paintings</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Largepaintings">Large Paintings</a></li>
+                                    </ul>
+                            </div>
+                        </li>                       
 
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Sell">Sell</a>
