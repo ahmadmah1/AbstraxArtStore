@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <section class="container">
@@ -25,24 +25,30 @@
 <div class="row">
     <div class="column">
         <a href="Home/Smallpaintings">
-            <img src="/lib/images/Bird.png" alt="Small Paintings" class="rounded" style="width:400px;height:400px;">
+        <img src="/lib/images/Bird.png" alt="Small Paintings" class="rounded" style="width:400px;height:400px;">
+        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Smallpaintings">
+            <h2 style="color:black;">Small Paintings</h2>
         </a>
-        <h2>Small Paintings</h2>
+        
     </div>
 
 
     <div class="column">
         <a href="Home/Mediumpaintings">
             <img src="/lib/images/Leaf.png" alt="Medium Paintings" class="rounded" style="width:400px;height:400px;">
-        </a>
-        <h2>Medium Paintings</h2>
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Mediumpaintings">
+                <h2 style="color:black;">Medium Paintings</h2>
+            </a>
+
     </div>
 
     <div class="column">
         <a href="Home/Largepaintings">
             <img src="~/lib/images/Cactus.png" alt="Large Paintings" class="rounded" style="width:400px;height:400px;">
-        </a>
-        <h2>Large Paintings</h2>
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Largepaintings">
+                <h2 style="color:black;">Large Paintings</h2>
+            </a>
+
     </div>
 
     <div class="container.sm p-5 my-5 bg-dark text-white col-md-4 rounded">
@@ -53,7 +59,7 @@
     <div class="container.sm p-5 my-5 bg-dark text-white col-md-4">
         <h1>Mission</h1>
         <p>
-            Our mission is to provide high quality unique artwork from local, inspired artists, to the people of New Zealand and maybe beyond.
+            Our mission is to provide high quality unique artwork from local, inspired artists, to the people of New Zealand and beyond.
         </p>
     </div>
 

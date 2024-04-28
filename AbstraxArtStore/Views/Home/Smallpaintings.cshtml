@@ -1,9 +1,8 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-@{
+﻿@{
     ViewData["Title"] = "Small Paintings";
 }
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         h1 {
             text-align:center;
@@ -13,19 +12,56 @@
 <h1>@ViewData["Title"]</h1>
 
 
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Four Columns</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <div class="column">Column 1</div>
-        <div class="column">Column 2</div>
-        <div class="column">Column 3</div>
-        <div class="column">Column 4</div>
+<div class="row">
+    <div class="column">
+            <img src="/lib/images/catherine-kay-greenup-17Q8cyAFyVg-unsplash.jpg" alt="Backyard" class="img-fluid rounded img-thumbnail" style="width:400px;height:400px;">
+        </a>
+        <h2>Backyard Painting</h2>
+        <h4>$29.99</h4>
     </div>
-</body>
-</html>
+
+
+    <div class="column">
+            <img src="/lib/images/painting-3995999_1280.jpg" alt="Medium Paintings" class="img-fluid rounded img-thumbnail" style="width:400px;height:400px;">
+        </a>
+        <h2>Dark Night Painting</h2>
+        <h4>34.99</h4>
+    </div>
+
+    <div class="column">
+            <img src="/lib/images/avocados-3513048_1280.jpg" alt="Large Paintings" class="img-fluid rounded img-thumbnail" style="width:400px;height:400px;">
+        </a>
+        <h2>Avocado Painting</h2> 
+        <h4>$19.99</h4>
+ </div>
+
+        <div class="column">
+            <a href="Home/Smallpaintings">
+            <img src="/lib/images/bird-3342446_1280.jpg" alt="Small Paintings" class="img-fluid rounded img-thumbnail" style="width:400px;height:400px;">
+            </a>
+            <h2>Seagull Painting</h2>
+            <h4>$24.99</h4>
+        </div>
+
+
+        <div class="column">
+            <a href="Home/Mediumpaintings">
+            <img src="/lib/images/fruit-2310212_1280.jpg" alt="Medium Paintings" class="img-fluid rounded img-thumbnail" style="width:400px;height:400px;">
+            </a>
+            <h2>Lemon Painting</h2>
+            <h4>$29.99</h4>
+        </div>
+
+        <div class="column">
+            <a href="Home/Largepaintings">
+            <img src="~/lib/images/graffiti-569265_1280.jpg" alt="Large Paintings" class="img-fluid rounded img-thumbnail" style="width:400px;height:400px;">
+            </a>
+            <h2>Graffiti Painting</h2> <h4>$49.99</h4>
+        </div>
+
+
+
+
+
+
+
