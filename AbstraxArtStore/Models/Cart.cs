@@ -27,6 +27,10 @@ namespace AbstraxArtStore.Models
 
         public int total_price { get; set; }
 
+        public ICollection<Product> Products { get; set; }
+        public Order Order { get; set; }
+
+
 
     }
 }

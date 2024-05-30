@@ -15,5 +15,7 @@ namespace AbstraxArtStore.Models
 
         public string category_name { get; set; }
 
+        public ICollection<Product> Products { get; set; }
+
     }
 }

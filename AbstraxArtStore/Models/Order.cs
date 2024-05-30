@@ -22,6 +22,11 @@ namespace AbstraxArtStore.Models
         [DataType(DataType.DateTime)]
 
         public string order_date { get; set; }
+
+        public Payment Payment { get; set; }
+
+        public Cart Cart { get; set; }
+
     }
 }
 

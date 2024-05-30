@@ -36,6 +36,10 @@ namespace AbstraxArtStore.Models
 
         public string product_image { get; set; }
 
+        public Category Category { get; set; }
+
+        public Cart Cart { get; set; }
+
 
     }
 }
