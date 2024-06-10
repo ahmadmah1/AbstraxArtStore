@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using AbstraxArtStore.Models;
 
 namespace AbstraxArtStore.Areas.Identity.Data;
 
@@ -31,4 +32,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             builder.Property(u => u.LastName).HasMaxLength(255);
         }
     }
+
+    public DbSet<AbstraxArtStore.Models.Cart> Cart { get; set; } = default!;
 }

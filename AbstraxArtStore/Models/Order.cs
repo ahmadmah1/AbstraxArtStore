@@ -1,31 +1,33 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using AbstraxArtStore.Areas.Identity.Data;
 
 namespace AbstraxArtStore.Models
 {
     public class Order
     {
         [Required]
-        public int order_id { get; set; }
+        public int OrderId { get; set; }
 
         [Required]
-        public int customer_id { get; set; }
+        public ApplicationUser CustomerId { get; set; }
 
-        [Required]
-        public int payment_id { get; set; }
+        public int CartId { get; set; }
 
-        [Required]
-        public int cart_id { get; set; }
+        public Cart Cart { get; set; }
+
+      
 
 
         [Required]
         [DataType(DataType.DateTime)]
 
-        public string order_date { get; set; }
+        public string OrderDate { get; set; }
 
-        public Payment Payment { get; set; }
 
-        public Cart Cart { get; set; }
+
+        
 
     }
 }
