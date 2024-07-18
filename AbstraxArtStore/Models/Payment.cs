@@ -10,7 +10,7 @@ namespace AbstraxArtStore.Models
         [Key] public int PaymentId { get; set; }
 
         [Required]
-        public ApplicationUser CustomerId { get; set; }
+        public Order OrderId { get; set; }
 
 
 

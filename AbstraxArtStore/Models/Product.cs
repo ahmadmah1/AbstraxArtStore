@@ -36,9 +36,8 @@ namespace AbstraxArtStore.Models
 
         public string ProductImage { get; set; }
 
-        public Category Category { get; set; }
-
-        public ICollection<Cart> Carts { get; set; }
+        public ICollection<Category> Categories { get; set; }
+        public Cart Cart { get; set; }
 
 
     }

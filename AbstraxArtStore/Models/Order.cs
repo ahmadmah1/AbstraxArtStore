@@ -13,21 +13,21 @@ namespace AbstraxArtStore.Models
         [Required]
         public ApplicationUser CustomerId { get; set; }
 
-        public int CartId { get; set; }
-
-        public Cart Cart { get; set; }
-
-      
-
-
         [Required]
         [DataType(DataType.DateTime)]
 
         public string OrderDate { get; set; }
 
+        public Cart Cart { get; set; }
 
 
-        
+        public ICollection<Payment> Payments { get; set; }
+
+
+
+
+
+
 
     }
 }
