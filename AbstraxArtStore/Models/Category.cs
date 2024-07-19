@@ -6,7 +6,7 @@ namespace AbstraxArtStore.Models
     public class Category
     {
         [Required]
-        public int CategoryId { get; set; }
+        [Key] public int CategoryId { get; set; }
 
 
         [Required(ErrorMessage = "Please enter a category name"), MaxLength(30)]
@@ -15,9 +15,9 @@ namespace AbstraxArtStore.Models
 
         public string CategoryName { get; set; }
 
-        
 
-        public Product Product { get; set; }
+        public ICollection<Product> Product { get; set; }
+        
 
     }
 }

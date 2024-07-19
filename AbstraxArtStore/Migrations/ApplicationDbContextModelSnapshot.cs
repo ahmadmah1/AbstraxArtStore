@@ -34,6 +34,9 @@ namespace AbstraxArtStore.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -108,16 +111,15 @@ namespace AbstraxArtStore.Migrations
                     b.Property<int>("CartQuantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("CustomerIdId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("CartId");
 
-                    b.HasIndex("CustomerIdId");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
@@ -140,6 +142,62 @@ namespace AbstraxArtStore.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("AbstraxArtStore.Models.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<string>("CustomerIdId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OrderDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("CustomerIdId");
+
+                    b.HasIndex("PaymentId");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("AbstraxArtStore.Models.Payment", b =>
+                {
+                    b.Property<int>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentAmount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("PaymentId");
+
+                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("AbstraxArtStore.Models.Product", b =>
@@ -318,27 +376,46 @@ namespace AbstraxArtStore.Migrations
 
             modelBuilder.Entity("AbstraxArtStore.Models.Cart", b =>
                 {
+                    b.HasOne("AbstraxArtStore.Models.Order", "Order")
+                        .WithMany("Carts")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AbstraxArtStore.Models.Product", "Product")
+                        .WithMany("Cart")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("AbstraxArtStore.Models.Order", b =>
+                {
                     b.HasOne("AbstraxArtStore.Areas.Identity.Data.ApplicationUser", "CustomerId")
                         .WithMany()
                         .HasForeignKey("CustomerIdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AbstraxArtStore.Models.Product", "Product")
-                        .WithMany("Carts")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("AbstraxArtStore.Models.Payment", "Payment")
+                        .WithMany("Orders")
+                        .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CustomerId");
 
-                    b.Navigation("Product");
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("AbstraxArtStore.Models.Product", b =>
                 {
                     b.HasOne("AbstraxArtStore.Models.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany("Product")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -399,12 +476,22 @@ namespace AbstraxArtStore.Migrations
 
             modelBuilder.Entity("AbstraxArtStore.Models.Category", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("AbstraxArtStore.Models.Order", b =>
+                {
+                    b.Navigation("Carts");
+                });
+
+            modelBuilder.Entity("AbstraxArtStore.Models.Payment", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("AbstraxArtStore.Models.Product", b =>
                 {
-                    b.Navigation("Carts");
+                    b.Navigation("Cart");
                 });
 #pragma warning restore 612, 618
         }

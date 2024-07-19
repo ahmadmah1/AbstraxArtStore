@@ -8,7 +8,7 @@ namespace AbstraxArtStore.Models
     public class Order
     {
         [Required]
-        public int OrderId { get; set; }
+        [Key] public int OrderId { get; set; }
 
         [Required]
         public ApplicationUser CustomerId { get; set; }
@@ -18,10 +18,12 @@ namespace AbstraxArtStore.Models
 
         public string OrderDate { get; set; }
 
-        public Cart Cart { get; set; }
 
 
-        public ICollection<Payment> Payments { get; set; }
+
+        public ICollection<Cart> Carts { get; set; }
+
+        public Payment Payment { get; set; }
 
 
 

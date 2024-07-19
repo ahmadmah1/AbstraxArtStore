@@ -6,7 +6,7 @@ namespace AbstraxArtStore.Models
     public class Product
     {
         [Required]
-        public int ProductId { get; set; }
+        [Key] public int ProductId { get; set; }
 
         [Required]
         public int CategoryId { get; set; }
@@ -36,8 +36,10 @@ namespace AbstraxArtStore.Models
 
         public string ProductImage { get; set; }
 
-        public ICollection<Category> Categories { get; set; }
-        public Cart Cart { get; set; }
+        public Category Category { get; set; }
+
+        public ICollection<Cart> Cart { get; set; }
+        
 
 
     }
