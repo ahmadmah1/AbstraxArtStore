@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AbstraxArtStore.Areas.Identity.Data;
 using AbstraxArtStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AbstraxArtStore.Controllers
 {
@@ -46,6 +47,7 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Carts/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName");
@@ -55,9 +57,10 @@ namespace AbstraxArtStore.Controllers
         // POST: Carts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CartId,Order_Id,OrderId,CartQuantity,quantity")] Cart cart)
+        public async Task<IActionResult> Create([Bind("CartId,Order_Id,CartQuantity,quantity")] Cart cart)
         {
             if (!ModelState.IsValid)
             {
@@ -70,6 +73,7 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Carts/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Cart == null)
@@ -89,9 +93,10 @@ namespace AbstraxArtStore.Controllers
         // POST: Carts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CartId,Order_Id,OrderId,CartQuantity,quantity")] Cart cart)
+        public async Task<IActionResult> Edit(int id, [Bind("CartId,Order_Id,CartQuantity,quantity")] Cart cart)
         {
             if (id != cart.CartId)
             {
@@ -123,6 +128,7 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Carts/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Cart == null)
@@ -142,6 +148,7 @@ namespace AbstraxArtStore.Controllers
         }
 
         // POST: Carts/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

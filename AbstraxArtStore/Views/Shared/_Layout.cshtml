@@ -47,15 +47,17 @@
                                         Buy
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Smallpaintings">Small Paintings</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Mediumpaintings">Medium Paintings</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Largepaintings">Large Paintings</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="">All Paintings</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="">Small Paintings</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="">Medium Paintings</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="">Large Paintings</a></li>
+
                                     </ul>
                             </div>
                         </li>                       
 
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Sell">Sell</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Orders" asp-action="">Orders</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">About</a>
@@ -64,7 +66,10 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Cart">Cart</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Payments" asp-action="">Payments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Carts" asp-action="">Cart</a>
                         </li>
                     </ul>
 
