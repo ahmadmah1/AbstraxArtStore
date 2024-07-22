@@ -18,18 +18,26 @@ namespace AbstraxArtStore.Models
 
         public int PaymentAmount { get; set; }
 
-        [Required(ErrorMessage = "Please enter a category name"), MaxLength(30)]
-        [DisplayName("Category name")]
-        [DataType(DataType.CreditCard)]
+        [Required(ErrorMessage = "Please enter your payment method"), MaxLength(30)]
+        [DisplayName("Payment Method")]
+        [DataType(DataType.Text)]
 
         public string PaymentMethod { get; set; }
 
         [Required]
-        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime PaymentDate { get; set; }
+        public Payment()
+        {
+            PaymentDate = DateTime.Now;
+        }
 
-        public string PaymentDate { get; set; }
+
+        public Order order { get; set; }
 
 
-        public ICollection<Order> Orders { get; set; }
+
+
+
     }
 }

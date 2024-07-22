@@ -10,20 +10,24 @@ namespace AbstraxArtStore.Models
         [Required]
         [Key] public int OrderId { get; set; }
 
-        [Required]
-        public ApplicationUser CustomerId { get; set; }
+        [Required(ErrorMessage = "Please enter your full name"), MaxLength(30)]
+        [DisplayName("Full name")]
+        [DataType(DataType.Text)]
+        public string FullName { get; set; }
 
         [Required]
-        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime OrderDate { get; set; }
+        public Order()
+        {
+            OrderDate = DateTime.Now;
+        }
 
-        public string OrderDate { get; set; }
+
+        public ICollection<Payment> Payments { get; set; }
 
 
 
-
-        public ICollection<Cart> Carts { get; set; }
-
-        public Payment Payment { get; set; }
 
 
 

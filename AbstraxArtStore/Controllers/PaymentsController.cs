@@ -10,90 +10,90 @@ using AbstraxArtStore.Models;
 
 namespace AbstraxArtStore.Controllers
 {
-    public class CartsController : Controller
+    public class PaymentsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CartsController(ApplicationDbContext context)
+        public PaymentsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Carts
+        // GET: Payments
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Cart.Include(c => c.Order);
+            var applicationDbContext = _context.Payment.Include(p => p.order);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Carts/Details/5
+        // GET: Payments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Cart == null)
+            if (id == null || _context.Payment == null)
             {
                 return NotFound();
             }
 
-            var cart = await _context.Cart
-                .Include(c => c.Order)
-                .FirstOrDefaultAsync(m => m.CartId == id);
-            if (cart == null)
+            var payment = await _context.Payment
+                .Include(p => p.order)
+                .FirstOrDefaultAsync(m => m.PaymentId == id);
+            if (payment == null)
             {
                 return NotFound();
             }
 
-            return View(cart);
+            return View(payment);
         }
 
-        // GET: Carts/Create
+        // GET: Payments/Create
         public IActionResult Create()
         {
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName");
+            ViewData["OrderId"] = new SelectList(_context.Order, "OrderId", "FullName");
             return View();
         }
 
-        // POST: Carts/Create
+        // POST: Payments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CartId,Order_Id,OrderId,CartQuantity,quantity")] Cart cart)
+        public async Task<IActionResult> Create([Bind("PaymentId,OrderId,PaymentAmount,PaymentMethod,PaymentDate")] Payment payment)
         {
             if (!ModelState.IsValid)
             {
-                _context.Add(cart);
+                _context.Add(payment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName", cart.Order_Id);
-            return View(cart);
+            ViewData["OrderId"] = new SelectList(_context.Order, "OrderId", "FullName", payment.OrderId);
+            return View(payment);
         }
 
-        // GET: Carts/Edit/5
+        // GET: Payments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Cart == null)
+            if (id == null || _context.Payment == null)
             {
                 return NotFound();
             }
 
-            var cart = await _context.Cart.FindAsync(id);
-            if (cart == null)
+            var payment = await _context.Payment.FindAsync(id);
+            if (payment == null)
             {
                 return NotFound();
             }
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName", cart.Order_Id);
-            return View(cart);
+            ViewData["OrderId"] = new SelectList(_context.Order, "OrderId", "FullName", payment.OrderId);
+            return View(payment);
         }
 
-        // POST: Carts/Edit/5
+        // POST: Payments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CartId,Order_Id,OrderId,CartQuantity,quantity")] Cart cart)
+        public async Task<IActionResult> Edit(int id, [Bind("PaymentId,OrderId,PaymentAmount,PaymentMethod,PaymentDate")] Payment payment)
         {
-            if (id != cart.CartId)
+            if (id != payment.PaymentId)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace AbstraxArtStore.Controllers
             {
                 try
                 {
-                    _context.Update(cart);
+                    _context.Update(payment);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CartExists(cart.CartId))
+                    if (!PaymentExists(payment.PaymentId))
                     {
                         return NotFound();
                     }
@@ -118,51 +118,51 @@ namespace AbstraxArtStore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName", cart.Order_Id);
-            return View(cart);
+            ViewData["OrderId"] = new SelectList(_context.Order, "OrderId", "FullName", payment.OrderId);
+            return View(payment);
         }
 
-        // GET: Carts/Delete/5
+        // GET: Payments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Cart == null)
+            if (id == null || _context.Payment == null)
             {
                 return NotFound();
             }
 
-            var cart = await _context.Cart
-                .Include(c => c.Order)
-                .FirstOrDefaultAsync(m => m.CartId == id);
-            if (cart == null)
+            var payment = await _context.Payment
+                .Include(p => p.order)
+                .FirstOrDefaultAsync(m => m.PaymentId == id);
+            if (payment == null)
             {
                 return NotFound();
             }
 
-            return View(cart);
+            return View(payment);
         }
 
-        // POST: Carts/Delete/5
+        // POST: Payments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Cart == null)
+            if (_context.Payment == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Cart'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Payment'  is null.");
             }
-            var cart = await _context.Cart.FindAsync(id);
-            if (cart != null)
+            var payment = await _context.Payment.FindAsync(id);
+            if (payment != null)
             {
-                _context.Cart.Remove(cart);
+                _context.Payment.Remove(payment);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CartExists(int id)
+        private bool PaymentExists(int id)
         {
-          return (_context.Cart?.Any(e => e.CartId == id)).GetValueOrDefault();
+          return (_context.Payment?.Any(e => e.PaymentId == id)).GetValueOrDefault();
         }
     }
 }

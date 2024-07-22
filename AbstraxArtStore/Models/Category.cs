@@ -10,14 +10,14 @@ namespace AbstraxArtStore.Models
 
 
         [Required(ErrorMessage = "Please enter a category name"), MaxLength(30)]
-        [DisplayName("Category name")]
+        [DisplayName("Category Name")]
         [DataType(DataType.Text)]
 
         public string CategoryName { get; set; }
 
 
-        public ICollection<Product> Product { get; set; }
-        
+        public ICollection<Product> Products { get; set; }
+
 
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbstraxArtStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240719001411_UpdatedTables")]
+    [Migration("20240722011337_UpdatedTables")]
     partial class UpdatedTables
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace AbstraxArtStore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.18")
+                .HasAnnotation("ProductVersion", "7.0.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -117,12 +117,19 @@ namespace AbstraxArtStore.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Order_Id")
+                        .IsRequired()
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantity")
                         .HasColumnType("int");
 
                     b.HasKey("CartId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("Order_Id");
 
                     b.HasIndex("ProductId");
 
@@ -155,22 +162,15 @@ namespace AbstraxArtStore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<string>("CustomerIdId")
+                    b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("OrderDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("OrderId");
-
-                    b.HasIndex("CustomerIdId");
-
-                    b.HasIndex("PaymentId");
 
                     b.ToTable("Order");
                 });
@@ -189,9 +189,8 @@ namespace AbstraxArtStore.Migrations
                     b.Property<int>("PaymentAmount")
                         .HasColumnType("int");
 
-                    b.Property<string>("PaymentDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PaymentMethod")
                         .IsRequired()
@@ -199,6 +198,8 @@ namespace AbstraxArtStore.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("PaymentId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Payment");
                 });
@@ -221,17 +222,17 @@ namespace AbstraxArtStore.Migrations
 
                     b.Property<string>("ProductImage")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("ProductPrice")
+                    b.Property<string>("ProductPrice")
+                        .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("ProductId");
 
@@ -380,13 +381,13 @@ namespace AbstraxArtStore.Migrations
             modelBuilder.Entity("AbstraxArtStore.Models.Cart", b =>
                 {
                     b.HasOne("AbstraxArtStore.Models.Order", "Order")
-                        .WithMany("Carts")
-                        .HasForeignKey("OrderId")
+                        .WithMany()
+                        .HasForeignKey("Order_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AbstraxArtStore.Models.Product", "Product")
-                        .WithMany("Cart")
+                        .WithMany("Carts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -396,29 +397,21 @@ namespace AbstraxArtStore.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("AbstraxArtStore.Models.Order", b =>
+            modelBuilder.Entity("AbstraxArtStore.Models.Payment", b =>
                 {
-                    b.HasOne("AbstraxArtStore.Areas.Identity.Data.ApplicationUser", "CustomerId")
-                        .WithMany()
-                        .HasForeignKey("CustomerIdId")
+                    b.HasOne("AbstraxArtStore.Models.Order", "order")
+                        .WithMany("Payments")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AbstraxArtStore.Models.Payment", "Payment")
-                        .WithMany("Orders")
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CustomerId");
-
-                    b.Navigation("Payment");
+                    b.Navigation("order");
                 });
 
             modelBuilder.Entity("AbstraxArtStore.Models.Product", b =>
                 {
                     b.HasOne("AbstraxArtStore.Models.Category", "Category")
-                        .WithMany("Product")
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -479,22 +472,17 @@ namespace AbstraxArtStore.Migrations
 
             modelBuilder.Entity("AbstraxArtStore.Models.Category", b =>
                 {
-                    b.Navigation("Product");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("AbstraxArtStore.Models.Order", b =>
                 {
-                    b.Navigation("Carts");
-                });
-
-            modelBuilder.Entity("AbstraxArtStore.Models.Payment", b =>
-                {
-                    b.Navigation("Orders");
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("AbstraxArtStore.Models.Product", b =>
                 {
-                    b.Navigation("Cart");
+                    b.Navigation("Carts");
                 });
 #pragma warning restore 612, 618
         }

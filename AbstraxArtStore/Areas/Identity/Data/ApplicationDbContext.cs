@@ -34,4 +34,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     }
 
     public DbSet<AbstraxArtStore.Models.Cart> Cart { get; set; } = default!;
+
+    public DbSet<AbstraxArtStore.Models.Payment> Payment { get; set; } = default!;
+
+    public DbSet<AbstraxArtStore.Models.Product> Product { get; set; } = default!;
+
+    public DbSet<AbstraxArtStore.Models.Order> Order { get; set; } = default!;
+
+    public DbSet<AbstraxArtStore.Models.Category> Category { get; set; } = default!;
 }

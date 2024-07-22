@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -31,19 +32,17 @@ namespace AbstraxArtStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payment",
+                name: "Order",
                 columns: table => new
                 {
-                    PaymentId = table.Column<int>(type: "int", nullable: false)
+                    OrderId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    PaymentAmount = table.Column<int>(type: "int", nullable: false),
-                    PaymentMethod = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    PaymentDate = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FullName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payment", x => x.PaymentId);
+                    table.PrimaryKey("PK_Order", x => x.OrderId);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,9 +53,9 @@ namespace AbstraxArtStore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     ProductName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    ProductPrice = table.Column<int>(type: "int", maxLength: 30, nullable: false),
+                    ProductPrice = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     ProductDesc = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ProductImage = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                    ProductImage = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,29 +69,24 @@ namespace AbstraxArtStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Payment",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerIdId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OrderDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaymentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    PaymentAmount = table.Column<int>(type: "int", nullable: false),
+                    PaymentMethod = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.OrderId);
+                    table.PrimaryKey("PK_Payment", x => x.PaymentId);
                     table.ForeignKey(
-                        name: "FK_Order_AspNetUsers_CustomerIdId",
-                        column: x => x.CustomerIdId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Order_Payment_PaymentId",
-                        column: x => x.PaymentId,
-                        principalTable: "Payment",
-                        principalColumn: "PaymentId",
+                        name: "FK_Payment_Order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Order",
+                        principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -102,16 +96,18 @@ namespace AbstraxArtStore.Migrations
                 {
                     CartId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Order_Id = table.Column<int>(type: "int", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: false),
-                    CartQuantity = table.Column<int>(type: "int", nullable: false)
+                    CartQuantity = table.Column<int>(type: "int", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cart", x => x.CartId);
                     table.ForeignKey(
-                        name: "FK_Cart_Order_OrderId",
-                        column: x => x.OrderId,
+                        name: "FK_Cart_Order_Order_Id",
+                        column: x => x.Order_Id,
                         principalTable: "Order",
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
@@ -124,9 +120,9 @@ namespace AbstraxArtStore.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cart_OrderId",
+                name: "IX_Cart_Order_Id",
                 table: "Cart",
-                column: "OrderId");
+                column: "Order_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cart_ProductId",
@@ -134,14 +130,9 @@ namespace AbstraxArtStore.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_CustomerIdId",
-                table: "Order",
-                column: "CustomerIdId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Order_PaymentId",
-                table: "Order",
-                column: "PaymentId");
+                name: "IX_Payment_OrderId",
+                table: "Payment",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",
@@ -156,13 +147,13 @@ namespace AbstraxArtStore.Migrations
                 name: "Cart");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Payment");
 
             migrationBuilder.DropTable(
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "Payment");
+                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "Category");

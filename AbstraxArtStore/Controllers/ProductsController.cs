@@ -10,90 +10,90 @@ using AbstraxArtStore.Models;
 
 namespace AbstraxArtStore.Controllers
 {
-    public class CartsController : Controller
+    public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CartsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Carts
+        // GET: Products
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Cart.Include(c => c.Order);
+            var applicationDbContext = _context.Product.Include(p => p.Category);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Carts/Details/5
+        // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Cart == null)
+            if (id == null || _context.Product == null)
             {
                 return NotFound();
             }
 
-            var cart = await _context.Cart
-                .Include(c => c.Order)
-                .FirstOrDefaultAsync(m => m.CartId == id);
-            if (cart == null)
+            var product = await _context.Product
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.ProductId == id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(cart);
+            return View(product);
         }
 
-        // GET: Carts/Create
+        // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName");
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName");
             return View();
         }
 
-        // POST: Carts/Create
+        // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CartId,Order_Id,OrderId,CartQuantity,quantity")] Cart cart)
+        public async Task<IActionResult> Create([Bind("ProductId,CategoryId,ProductName,ProductPrice,ProductDesc,ProductImage")] Product product)
         {
             if (!ModelState.IsValid)
             {
-                _context.Add(cart);
+                _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName", cart.Order_Id);
-            return View(cart);
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", product.CategoryId);
+            return View(product);
         }
 
-        // GET: Carts/Edit/5
+        // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Cart == null)
+            if (id == null || _context.Product == null)
             {
                 return NotFound();
             }
 
-            var cart = await _context.Cart.FindAsync(id);
-            if (cart == null)
+            var product = await _context.Product.FindAsync(id);
+            if (product == null)
             {
                 return NotFound();
             }
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName", cart.Order_Id);
-            return View(cart);
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", product.CategoryId);
+            return View(product);
         }
 
-        // POST: Carts/Edit/5
+        // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CartId,Order_Id,OrderId,CartQuantity,quantity")] Cart cart)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,CategoryId,ProductName,ProductPrice,ProductDesc,ProductImage")] Product product)
         {
-            if (id != cart.CartId)
+            if (id != product.ProductId)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace AbstraxArtStore.Controllers
             {
                 try
                 {
-                    _context.Update(cart);
+                    _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CartExists(cart.CartId))
+                    if (!ProductExists(product.ProductId))
                     {
                         return NotFound();
                     }
@@ -118,51 +118,51 @@ namespace AbstraxArtStore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName", cart.Order_Id);
-            return View(cart);
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", product.CategoryId);
+            return View(product);
         }
 
-        // GET: Carts/Delete/5
+        // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Cart == null)
+            if (id == null || _context.Product == null)
             {
                 return NotFound();
             }
 
-            var cart = await _context.Cart
-                .Include(c => c.Order)
-                .FirstOrDefaultAsync(m => m.CartId == id);
-            if (cart == null)
+            var product = await _context.Product
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.ProductId == id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(cart);
+            return View(product);
         }
 
-        // POST: Carts/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Cart == null)
+            if (_context.Product == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Cart'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Product'  is null.");
             }
-            var cart = await _context.Cart.FindAsync(id);
-            if (cart != null)
+            var product = await _context.Product.FindAsync(id);
+            if (product != null)
             {
-                _context.Cart.Remove(cart);
+                _context.Product.Remove(product);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CartExists(int id)
+        private bool ProductExists(int id)
         {
-          return (_context.Cart?.Any(e => e.CartId == id)).GetValueOrDefault();
+          return (_context.Product?.Any(e => e.ProductId == id)).GetValueOrDefault();
         }
     }
 }

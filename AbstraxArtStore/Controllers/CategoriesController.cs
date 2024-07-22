@@ -10,90 +10,87 @@ using AbstraxArtStore.Models;
 
 namespace AbstraxArtStore.Controllers
 {
-    public class CartsController : Controller
+    public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CartsController(ApplicationDbContext context)
+        public CategoriesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Carts
+        // GET: Categories
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Cart.Include(c => c.Order);
-            return View(await applicationDbContext.ToListAsync());
+              return _context.Category != null ? 
+                          View(await _context.Category.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Category'  is null.");
         }
 
-        // GET: Carts/Details/5
+        // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Cart == null)
+            if (id == null || _context.Category == null)
             {
                 return NotFound();
             }
 
-            var cart = await _context.Cart
-                .Include(c => c.Order)
-                .FirstOrDefaultAsync(m => m.CartId == id);
-            if (cart == null)
+            var category = await _context.Category
+                .FirstOrDefaultAsync(m => m.CategoryId == id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(cart);
+            return View(category);
         }
 
-        // GET: Carts/Create
+        // GET: Categories/Create
         public IActionResult Create()
         {
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName");
             return View();
         }
 
-        // POST: Carts/Create
+        // POST: Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CartId,Order_Id,OrderId,CartQuantity,quantity")] Cart cart)
+        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName")] Category category)
         {
             if (!ModelState.IsValid)
             {
-                _context.Add(cart);
+                _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName", cart.Order_Id);
-            return View(cart);
+            return View(category);
         }
 
-        // GET: Carts/Edit/5
+        // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Cart == null)
+            if (id == null || _context.Category == null)
             {
                 return NotFound();
             }
 
-            var cart = await _context.Cart.FindAsync(id);
-            if (cart == null)
+            var category = await _context.Category.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName", cart.Order_Id);
-            return View(cart);
+            return View(category);
         }
 
-        // POST: Carts/Edit/5
+        // POST: Categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CartId,Order_Id,OrderId,CartQuantity,quantity")] Cart cart)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName")] Category category)
         {
-            if (id != cart.CartId)
+            if (id != category.CategoryId)
             {
                 return NotFound();
             }
@@ -102,12 +99,12 @@ namespace AbstraxArtStore.Controllers
             {
                 try
                 {
-                    _context.Update(cart);
+                    _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CartExists(cart.CartId))
+                    if (!CategoryExists(category.CategoryId))
                     {
                         return NotFound();
                     }
@@ -118,51 +115,49 @@ namespace AbstraxArtStore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Order_Id"] = new SelectList(_context.Order, "OrderId", "FullName", cart.Order_Id);
-            return View(cart);
+            return View(category);
         }
 
-        // GET: Carts/Delete/5
+        // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Cart == null)
+            if (id == null || _context.Category == null)
             {
                 return NotFound();
             }
 
-            var cart = await _context.Cart
-                .Include(c => c.Order)
-                .FirstOrDefaultAsync(m => m.CartId == id);
-            if (cart == null)
+            var category = await _context.Category
+                .FirstOrDefaultAsync(m => m.CategoryId == id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(cart);
+            return View(category);
         }
 
-        // POST: Carts/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Cart == null)
+            if (_context.Category == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Cart'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Category'  is null.");
             }
-            var cart = await _context.Cart.FindAsync(id);
-            if (cart != null)
+            var category = await _context.Category.FindAsync(id);
+            if (category != null)
             {
-                _context.Cart.Remove(cart);
+                _context.Category.Remove(category);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CartExists(int id)
+        private bool CategoryExists(int id)
         {
-          return (_context.Cart?.Any(e => e.CartId == id)).GetValueOrDefault();
+          return (_context.Category?.Any(e => e.CategoryId == id)).GetValueOrDefault();
         }
     }
 }
