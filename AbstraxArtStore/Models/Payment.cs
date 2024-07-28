@@ -18,8 +18,6 @@ namespace AbstraxArtStore.Models
 
         // This [Column(TypeName = "decimal(7,2)")] defines the decimal field for the price.
         // The '7' refers to the total amount of digits allowed and the '2' refers to the total amount of digits allowed after the decimal point.
-        // This [Column(TypeName = "decimal(7,2)")] defines the decimal field for the price.
-        // The '7' refers to the total amount of digits allowed and the '2' refers to the total amount of digits allowed after the decimal point.
         [Required(ErrorMessage = "Please enter a product price")]
         [Column(TypeName = "decimal(7,2)")]
         [Display(Name = "Product Price")]
