@@ -5,71 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<section class="container">
-    <div class="slider-wrapper">
-        <div class="slider">
-            <img id="slide-1" src="~/lib/images/photo-1586023492125-27b2c045efd7.png" alt="slide 1" style="width:1200px;height:650px;" />
-            <img id="slide-2" src="/lib/images/Couch.png" alt="slide 2" style="width:1200px;height:650px;" />
-            <img id="slide-3" src="/lib/images/Couch2.png" alt="slide 3" style="width:1200px;height:650px;" />
+<body>
+
+    <div class="slider">
+        <div class="list">
+            <div class="item">
+                <img src="/lib/images/photo-1586023492125-27b2c045efd7.png" alt="">
+            </div>
+            <div class="item">
+                <img src="/lib/images/Couch.png" alt="">
+            </div>
+            <div class="item">
+                <img src="/lib/images/Couch2.png" alt="">
+            </div>
         </div>
-        <div class="slider-nav">
-            <a href="#slide-1"></a>
-            <a href="#slide-2"></a>
-            <a href="#slide-3"></a>
+        <div class="buttons">
+            <button id="prev"><</button>
+            <button id="next">></button>
         </div>
-        
-  
-</section>
-
-
-<div class="row">
-    <div class="column">
-        <a href="Home/Smallpaintings">
-        <img src="/lib/images/Bird.png" alt="Small Paintings" class="rounded" style="width:400px;height:400px;">
-        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Smallpaintings">
-            <h2 style="color:black;">Small Paintings</h2>
-        </a>
-        
+        <ul class="dots">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
     </div>
 
-
-    <div class="column">
-        <a href="Home/Mediumpaintings">
-            <img src="/lib/images/Leaf.png" alt="Medium Paintings" class="rounded" style="width:400px;height:400px;">
-            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Mediumpaintings">
-                <h2 style="color:black;">Medium Paintings</h2>
-            </a>
-
-    </div>
-
-    <div class="column">
-        <a href="Home/Largepaintings">
-            <img src="~/lib/images/Cactus.png" alt="Large Paintings" class="rounded" style="width:400px;height:400px;">
-            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Largepaintings">
-                <h2 style="color:black;">Large Paintings</h2>
-            </a>
-
-    </div>
-
-    <div class="container.sm p-5 my-5 bg-dark text-white col-md-4 rounded">
-        <h1>Who Are We</h1>
-        <p>We are Abstrax Art. A brand striving to promote amazing artwork online for everyone to benefit from. Buy beautiful artwork from a range of talented artists or become the talented artist yourself and sell your own.</p>
-    </div>
-
-    <div class="container.sm p-5 my-5 bg-dark text-white col-md-4">
-        <h1>Mission</h1>
-        <p>
-            Our mission is to provide high quality unique artwork from local, inspired artists, to the people of New Zealand and beyond.
-        </p>
-    </div>
-
-    <div class="container.sm p-5 my-5 bg-dark text-white col-md-4 rounded">
-        <h1>Why Abstrax Art?</h1>
-        <p>
-Abstrax Art is not just a marketplace, its a home for artists to spread their love for art and spread it to the people of New Zealand. Take control of your art and reach a larger audience at a place where you find people with the same love for art.
-        </p>
-    </div>
+    <script src="app.js"></script>
+</body>
 
 
-</div>
+
+
 
