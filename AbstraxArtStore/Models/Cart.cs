@@ -24,7 +24,7 @@ namespace AbstraxArtStore.Models
         [DataType(DataType.Text)]
         [RegularExpression("^([a-zA-Z]+[\\'\\,\\.\\-]?[a-zA-Z ]*)+[ ]([a-zA-Z]+[\\'\\,\\.\\-]?[a-zA-Z ]+)+$", ErrorMessage = "Please enter your full name")]
         // Regular expressions specify what can and can't be put in a field. This one for example prevents special characters such as '!','@', and numbers from being inputted into the field.
-        public string CartQuantity { get; set; }
+        public string FullName { get; set; }
 
 
 

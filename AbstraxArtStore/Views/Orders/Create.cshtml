@@ -18,8 +18,8 @@
                 <span asp-validation-for="FullName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OrderDate" class="control-label"></label>
-                <input asp-for="OrderDate" class="form-control" />
+                <label type="hidden" class="col-md-4 control-label">@Html.DisplayFor(Model => Model.OrderDate)</label>
+                <input type="hidden" id="lname" name="lname" value="@DateTime.Now.ToString("yyyy-MM-dd")"><br><br>
                 <span asp-validation-for="OrderDate" class="text-danger"></span>
             </div>
             <div class="form-group">

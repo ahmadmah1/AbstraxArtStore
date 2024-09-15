@@ -205,14 +205,14 @@ namespace AbstraxArtStore.Controllers
             {
                 _context.Product.Remove(product);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-          return (_context.Product?.Any(e => e.ProductId == id)).GetValueOrDefault();
+            return (_context.Product?.Any(e => e.ProductId == id)).GetValueOrDefault();
         }
     }
 }

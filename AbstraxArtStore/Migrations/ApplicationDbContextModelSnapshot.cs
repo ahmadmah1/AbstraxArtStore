@@ -108,7 +108,7 @@ namespace AbstraxArtStore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"));
 
-                    b.Property<string>("CartQuantity")
+                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -177,10 +177,9 @@ namespace AbstraxArtStore.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PaymentAmount")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<decimal>("PaymentAmount")
+                        .HasMaxLength(7)
+                        .HasColumnType("decimal(7,2)");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
@@ -223,10 +222,9 @@ namespace AbstraxArtStore.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("ProductPrice")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<decimal>("ProductPrice")
+                        .HasMaxLength(7)
+                        .HasColumnType("decimal(7,2)");
 
                     b.HasKey("ProductId");
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace AbstraxArtStore
+namespace AbstraxArtStore.Models
 {
     public class PaginatedList<T> : List<T>
     {
@@ -16,7 +16,7 @@ namespace AbstraxArtStore
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
 
-            this.AddRange(items);
+            AddRange(items);
         }
 
         public bool HasPreviousPage => PageIndex > 1;
