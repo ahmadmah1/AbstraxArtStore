@@ -21,6 +21,16 @@ namespace AbstraxArtStore.Models
         [DataType(DataType.Text)]
 
         public string ProductName { get; set; }
+        
+        [Column(TypeName ="nvarchar(255)")]
+        [DisplayName("Product Image")]
+        public string ImageName { get; set; }
+
+        [Column(TypeName = "nvarchar(255)")]
+        [DisplayName("Product Image")]
+        [Required(ErrorMessage = "Please enter a product image")]
+        [NotMapped]
+        public IFormFile ProductImage { get; set; }
 
 
 
@@ -38,9 +48,7 @@ namespace AbstraxArtStore.Models
         [DataType(DataType.Text)]
         public required string ProductDesc { get; set; }
 
-        [DisplayName("Product Image")]
-        [Required(ErrorMessage = "Please enter a product image"), MaxLength(10)]
-        public required string ProductImage { get; set; }
+
         
 
     public Category Category { get; set; }

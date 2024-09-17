@@ -7,67 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AbstraxArtStore.Areas.Identity.Data;
 using AbstraxArtStore.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace AbstraxArtStore.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            this._hostEnvironment = hostEnvironment;
         }
 
         // GET: Products
-        public async Task<IActionResult> Index(
-            string sortOrder,
-            string currentFilter,
-            string searchString,
-            int? pageNumber)
+        public async Task<IActionResult> Index()
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-
-            if (searchString != null)
-            {
-                pageNumber = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-
-            ViewData["CurrentFilter"] = searchString;
-
-            var products = from s in _context.Product
-                           select s;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                products = products.Where(s => s.ProductName.Contains(searchString)
-                                       || s.ProductDesc.Contains(searchString));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    products = products.OrderByDescending(s => s.ProductName);
-                    break;
-                case "Date":
-                    products = products.OrderBy(s => s.ProductDesc);
-                    break;
-                case "date_desc":
-                    products = products.OrderByDescending(s => s.ProductDesc);
-                    break;
-                default:
-                    products = products.OrderBy(s => s.ProductName);
-                    break;
-            }
-            int pageSize = 3;
-            return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
+            var applicationDbContext = _context.Product.Include(p => p.Category);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -90,7 +48,6 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Products/Create
-        [Authorize]
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName");
@@ -100,13 +57,23 @@ namespace AbstraxArtStore.Controllers
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,CategoryId,ProductName,ProductPrice,ProductDesc,ProductImage")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,CategoryId,ProductName,ProductImage,ProductPrice,ProductDesc")] Product product)
         {
             if (!ModelState.IsValid)
             {
+                //Save Image to wwwroot/images
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(product.ProductImage.FileName);
+                string extension = Path.GetExtension(product.ProductImage.FileName);
+                product.ImageName=fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/lib/Images/", fileName);
+                using (var fileStream = new FileStream(path,FileMode.Create))
+                {
+                    await product.ProductImage.CopyToAsync(fileStream);
+                }
+                //Insert Record
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -116,7 +83,6 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Products/Edit/5
-        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Product == null)
@@ -136,10 +102,9 @@ namespace AbstraxArtStore.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,CategoryId,ProductName,ProductPrice,ProductDesc,ProductImage")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,CategoryId,ProductName,ImageName,ProductPrice,ProductDesc")] Product product)
         {
             if (id != product.ProductId)
             {
@@ -171,7 +136,6 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Products/Delete/5
-        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Product == null)
@@ -191,7 +155,6 @@ namespace AbstraxArtStore.Controllers
         }
 
         // POST: Products/Delete/5
-        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -205,14 +168,14 @@ namespace AbstraxArtStore.Controllers
             {
                 _context.Product.Remove(product);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-            return (_context.Product?.Any(e => e.ProductId == id)).GetValueOrDefault();
+          return (_context.Product?.Any(e => e.ProductId == id)).GetValueOrDefault();
         }
     }
 }

@@ -18,6 +18,12 @@
             @Html.DisplayFor(model => model.ProductName)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ImageName)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ProductPrice)
         </dt>
         <dd class = "col-sm-10">
@@ -28,12 +34,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ProductDesc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductImage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductImage)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Category)
