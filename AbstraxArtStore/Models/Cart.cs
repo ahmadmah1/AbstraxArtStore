@@ -12,25 +12,24 @@ namespace AbstraxArtStore.Models
 
 
         [Required]
-        [DisplayName("Order in the name of...")]
+        [DisplayName("Order Id")]
         [ForeignKey("Order")] public int? Order_Id { get; set; } //Foreign Key
 
      
 
 
 
-        [Required(ErrorMessage = "Please enter your Full Name"), MaxLength(50)]
+        [Required(ErrorMessage = "Please enter your full name"), MaxLength(25)]
         [DisplayName("Full Name")]
         [DataType(DataType.Text)]
         [RegularExpression("^([a-zA-Z]+[\\'\\,\\.\\-]?[a-zA-Z ]*)+[ ]([a-zA-Z]+[\\'\\,\\.\\-]?[a-zA-Z ]+)+$", ErrorMessage = "Please enter your full name")]
-        // Regular expressions specify what can and can't be put in a field. This one for example prevents special characters such as '!','@', and numbers from being inputted into the field.
+        // Regular expressions specify what can and can't be put in a field. This one for example prevents special characters such as '!','@' and numbers along with single names from being inputted into the field.
         public string FullName { get; set; }
 
 
 
-        [Required(ErrorMessage = "Please enter the amount of products")]
+        [Required(ErrorMessage = "Please enter the amount of products"), Range(1, 100)]
         [DisplayName("Quantity")]
-        [Range(1, 99999, ErrorMessage = "Number is not valid")]
         public int quantity { get; set; }
 
 
