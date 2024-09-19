@@ -5,7 +5,7 @@
 namespace AbstraxArtStore.Migrations
 {
     /// <inheritdoc />
-    public partial class Admin : Migration
+    public partial class Categories : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,6 +21,16 @@ namespace AbstraxArtStore.Migrations
                 nullable: false,
                 defaultValue: "");
 
+            migrationBuilder.AlterColumn<string>(
+                name: "FullName",
+                table: "Cart",
+                type: "nvarchar(25)",
+                maxLength: 25,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(50)",
+                oldMaxLength: 50);
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -29,7 +39,7 @@ namespace AbstraxArtStore.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CustomerId", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "70d43dd8-fddd-4c76-98dc-8631e6a8d5b5", 0, "admin@example.com", true, "Admin", "Boss", false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEA4s4TA9ESmoVz5tyBgB/Qio/vxjS0fTFPrDyK1oOdl7TQRb3iySs3nLb1j5VC9ntw==", null, false, "d208141a-e003-44de-835f-2ab27321b71f", false, "admin@example.com" });
+                values: new object[] { "1", 0, "09c4b929-766b-4cef-99a7-64d7c5937f19", 0, "admin@example.com", true, "Admin", "Boss", false, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAELMq5BnySrEde8mXkB0GJFScj0Hj/pyxAQBPEtIHULQA7B9jaICkuswZFTe22j+qUw==", null, false, "d2474036-9ea4-47a1-9c56-58f3a8bb4551", false, "admin@example.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -66,6 +76,16 @@ namespace AbstraxArtStore.Migrations
                 maxLength: 10,
                 nullable: false,
                 defaultValue: "");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "FullName",
+                table: "Cart",
+                type: "nvarchar(50)",
+                maxLength: 50,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(25)",
+                oldMaxLength: 25);
         }
     }
 }

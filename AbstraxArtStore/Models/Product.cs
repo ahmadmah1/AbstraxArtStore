@@ -22,11 +22,11 @@ namespace AbstraxArtStore.Models
 
         public string ProductName { get; set; }
         
-        [Column(TypeName ="nvarchar(255)")]
+        [Column(TypeName ="nvarchar(100)")]
         [DisplayName("Product Image")]
         public string ImageName { get; set; }
 
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(100)")]
         [DisplayName("Product Image")]
         [Required(ErrorMessage = "Please enter a product image")]
         [NotMapped]

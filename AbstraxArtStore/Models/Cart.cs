@@ -29,7 +29,7 @@ namespace AbstraxArtStore.Models
 
 
         [Required(ErrorMessage = "Please enter the amount of products"), Range(1, 100)]
-        [DisplayName("Quantity")]
+        [DisplayName("quantity")]
         public int quantity { get; set; }
 
 

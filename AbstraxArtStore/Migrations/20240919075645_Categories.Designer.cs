@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbstraxArtStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240919070918_Admin")]
-    partial class Admin
+    [Migration("20240919075645_Categories")]
+    partial class Categories
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,7 +107,7 @@ namespace AbstraxArtStore.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "70d43dd8-fddd-4c76-98dc-8631e6a8d5b5",
+                            ConcurrencyStamp = "09c4b929-766b-4cef-99a7-64d7c5937f19",
                             CustomerId = 0,
                             Email = "admin@example.com",
                             EmailConfirmed = true,
@@ -116,9 +116,9 @@ namespace AbstraxArtStore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA4s4TA9ESmoVz5tyBgB/Qio/vxjS0fTFPrDyK1oOdl7TQRb3iySs3nLb1j5VC9ntw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELMq5BnySrEde8mXkB0GJFScj0Hj/pyxAQBPEtIHULQA7B9jaICkuswZFTe22j+qUw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d208141a-e003-44de-835f-2ab27321b71f",
+                            SecurityStamp = "d2474036-9ea4-47a1-9c56-58f3a8bb4551",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         });
@@ -134,8 +134,8 @@ namespace AbstraxArtStore.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<int?>("Order_Id")
                         .IsRequired()

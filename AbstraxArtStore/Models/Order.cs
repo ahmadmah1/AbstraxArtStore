@@ -11,11 +11,11 @@ namespace AbstraxArtStore.Models
         [Required]
         [Key] public int OrderId { get; set; }
 
-        [Required(ErrorMessage = "Please enter your full Name"), MaxLength(50)]
+        [Required(ErrorMessage = "Please enter your full Name"), MaxLength(30)]
         [DisplayName("Full name")]
         [DataType(DataType.Text)]
-        [RegularExpression("^[\\w'\\-,.][^0-9_!¡?÷?¿/\\\\+=@#$%ˆ&*(){}|~<>;:[\\]]{2,}$")]
-        // Regular expressions specify what can and can't be put in a field. This one for example prevents special characters such as '!','@', and numbers from being inputted into the field.
+        [RegularExpression("^([a-zA-Z]+[\\'\\,\\.\\-]?[a-zA-Z ]*)+[ ]([a-zA-Z]+[\\'\\,\\.\\-]?[a-zA-Z ]+)+$")]
+        // Regular expressions specify what can and can't be put in a field. This one for example prevents special characters such as '!','@', and numbers along with single names from being inputted into the field.
         public string FullName { get; set; }
 
         [Display(Name = "Order Date")]
