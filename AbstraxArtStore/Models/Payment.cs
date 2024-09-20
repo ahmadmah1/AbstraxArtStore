@@ -6,6 +6,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AbstraxArtStore.Models
 {
+    public enum PaymentM
+    {
+        [Display(Name = "Credit")]
+        Credit,
+        [Display(Name = "Cash")]
+        Cash,
+        [Display(Name = "Bank Transfer")]
+        BankTransfer
+
+    }
     public class Payment
     {
         [Required]
@@ -29,9 +39,9 @@ namespace AbstraxArtStore.Models
 
         [Required(ErrorMessage = "Please enter your payment method"), MaxLength(15)]
         [DisplayName("Payment Method")]
-        [DataType(DataType.Text)]
 
-        public string PaymentMethod { get; set; }
+
+        public PaymentM PaymentMethod { get; set; }
 
         [Display(Name = "Payment Date")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]

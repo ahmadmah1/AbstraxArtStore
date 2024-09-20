@@ -23,7 +23,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="PaymentMethod" class="control-label"></label>
-                <input asp-for="PaymentMethod" class="form-control" />
+                <select asp-for="PaymentMethod" class="form-control" asp-items="@Html.GetEnumSelectList(typeof(PaymentM))">
+
+                </select>
                 <span asp-validation-for="PaymentMethod" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -19,16 +19,16 @@ html {
 
 
 .homepagebg {
-    background-image: none; /* Remove the background image */
+    background-image:  /* Remove the background image */
     background-color: lightgray; /* Replace with your desired color */
 }
 
 
 body {
     margin-bottom: 60px;
-    background-color: lightgray;
+    background-color: lightgrey;
     height: 100vh
-    color: white;
+    
 }
 
 

@@ -39,9 +39,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 {
                     Id = "1",
                     FirstName = "Admin",
-                    LastName = "Boss",
-                    UserName = "admin@example.com",
-                    NormalizedUserName = "ADMIN@EXAMPLE.COM",
+                    LastName = "Admin",
+                    UserName = "admin@abstraxartstore.com",
+                    NormalizedUserName = "ADMIN@ABSTRAXARTSTORE.COM",
                     Email = "admin@example.com",
                     NormalizedEmail = "ADMIN@EXAMPLE.COM",
                     EmailConfirmed = true,
