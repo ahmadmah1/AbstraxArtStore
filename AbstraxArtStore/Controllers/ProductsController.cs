@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AbstraxArtStore.Areas.Identity.Data;
 using AbstraxArtStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AbstraxArtStore.Controllers
 {
@@ -22,12 +23,50 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+public async Task<IActionResult> Index(
+    string sortOrder,
+    string currentFilter,
+    string searchString,
+    int? pageNumber)
         {
-            var applicationDbContext = _context.Product.Include(p => p.Category);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
+    ViewData["CurrentSort"] = sortOrder;
+    ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+    ViewData["ProductdescSortParm"] = sortOrder == "productdesc" ? "productdesc_desc" : "productdesc";
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = searchString;
+    var products = from s in _context.Product
+                   select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.ProductName.Contains(searchString)
+                                       || s.ProductDesc.Contains(searchString));
+            }
+            switch (sortOrder)
+    {
+        case "name_desc":
+            products = products.OrderByDescending(s => s.ProductName);
+            break;
+        case "productdesc":
+            products = products.OrderBy(s => s.ProductDesc);
+            break;
+        case "productdesc_desc":
+            products = products.OrderByDescending(s => s.ProductDesc);
+            break;
+        default:
+            products = products.OrderBy(s => s.ProductName);
+            break;
+    }
+            int pageSize = 5;
+            return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await products.AsNoTracking().ToListAsync());
+}
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -48,6 +87,7 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName");
@@ -83,6 +123,7 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Product == null)
@@ -136,6 +177,7 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Product == null)

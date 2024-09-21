@@ -21,6 +21,7 @@ html {
 .homepagebg {
     background-image:; /* Remove the background image */
     background-color: black; /* Replace with your desired color */
+    overflow-x: hidden;
 
 }
 
@@ -28,9 +29,8 @@ html {
 body {
     margin-bottom: 60px;
     background-color: lightgray;
-    height: 100%
-
-    
+    height: 100%;
+    overflow-x: hidden;
 }
 
 
@@ -63,7 +63,7 @@ body {
     }
 
 /* Button styling for black background */
-.cta-button {
+.button {
     background-color: #ffffff; /* White button */
     border: 2px solid #ffffff;
     padding: 10px 30px;
@@ -74,7 +74,7 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-    .cta-button:hover {
+    .button:hover {
         background-color: #000000; /* Black background on hover */
         color: #ffffff; /* White text on hover */
         border: 2px solid #ffffff; /* Maintain white border */
@@ -154,7 +154,7 @@ body {
     clear: both;
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:768px) {
     .column {
         width: 100%;
     }

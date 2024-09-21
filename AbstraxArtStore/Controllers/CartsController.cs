@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AbstraxArtStore.Areas.Identity.Data;
 using AbstraxArtStore.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace AbstraxArtStore.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CartsController : Controller
     {
         private readonly ApplicationDbContext _context;

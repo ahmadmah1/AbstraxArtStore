@@ -38,7 +38,6 @@ namespace AbstraxArtStore.Models
         // The '7' refers to the total amount of digits allowed and the '2' refers to the total amount of digits allowed after the decimal point.
         [Required(ErrorMessage = "Please enter a product price")]
         [Column(TypeName = "decimal(7,2)")]
-        [MaxLength(30)]
         [Display(Name = "Product Price")]
         [RegularExpression("^[$]?[0-9]*(\\.)?[0-9]?[0-9]?$", ErrorMessage = "Please input a valid price")]
 
