@@ -19,17 +19,67 @@ html {
 
 
 .homepagebg {
-    background-image:  /* Remove the background image */
-    background-color: lightgray; /* Replace with your desired color */
+    background-image:; /* Remove the background image */
+    background-color: black; /* Replace with your desired color */
+
 }
 
 
 body {
     margin-bottom: 60px;
-    background-color: lightgrey;
-    height: 100vh
+    background-color: lightgray;
+    height: 100%
+
     
 }
+
+
+
+/* Hero section with black background */
+.LearnMore {
+    background-color: black; /* Keep the black background */
+    padding: 100px 20px;
+    width: 100%;
+    text-align: center;
+}
+
+    .LearnMore .content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Styling the text to stand out on the black background */
+    .LearnMore h1 {
+        font-size: 80px;
+        font-family: "Lucida Console", monospace;
+        color: #ffffff; /* White text */
+    }
+
+    .LearnMore p {
+        font-size: 35px;
+        color: #ffffff; /* Light grey text for contrast */
+        font-family: "Lucida Console", monospace;
+        margin-bottom: 20px;
+    }
+
+/* Button styling for black background */
+.cta-button {
+    background-color: #ffffff; /* White button */
+    border: 2px solid #ffffff;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: "Lucida Console", monospace;
+    color: #000000; /* Black text for button */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .cta-button:hover {
+        background-color: #000000; /* Black background on hover */
+        color: #ffffff; /* White text on hover */
+        border: 2px solid #ffffff; /* Maintain white border */
+    }
+
 
 
 
