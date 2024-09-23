@@ -12,7 +12,7 @@ namespace AbstraxArtStore.Models
 
 
         [Required]
-        [DisplayName("Order Id")]
+        [DisplayName("Order Name")]
         [ForeignKey("Order")] public int? Order_Id { get; set; } //Foreign Key
 
      

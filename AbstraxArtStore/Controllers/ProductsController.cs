@@ -87,7 +87,7 @@ public async Task<IActionResult> Index(
         }
 
         // GET: Products/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName");

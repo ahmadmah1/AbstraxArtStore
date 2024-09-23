@@ -37,7 +37,7 @@ namespace AbstraxArtStore.Models
         public required decimal PaymentAmount { get; set; }
 
 
-        [Required(ErrorMessage = "Please enter your payment method"), MaxLength(15)]
+        [Required(ErrorMessage = "Please enter your payment method")]
         [DisplayName("Payment Method")]
 
 

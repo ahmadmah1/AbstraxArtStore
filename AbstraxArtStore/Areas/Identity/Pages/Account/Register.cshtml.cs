@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System.Runtime.InteropServices;
 
 namespace AbstraxArtStore.Areas.Identity.Pages.Account
 {
@@ -73,12 +74,17 @@ namespace AbstraxArtStore.Areas.Identity.Pages.Account
         {
 
             [Required]
-            [StringLength(255, ErrorMessage = "The first name field should have a maximum of 255 characters")]
+            [StringLength(30, ErrorMessage = "The first name field should have a maximum of 30 characters")]
             [Display(Name = "First Name")]
+            [RegularExpression("^[\\w'\\-,.][^0-9_!¡?÷?¿/\\\\+=@#$%ˆ&*(){}|~<>;:[\\]]{2,}$", ErrorMessage = "Please enter your first name")]
+            // Regular expressions specify what can and can't be put in a field. This one for example prevents special characters such as '!','@', and numbers from being inputted into the field.
+
             public string FirstName { get; set; }
 
             [Required]
-            [StringLength(255, ErrorMessage = "The last name field should have a maximum of 255 characters")]
+            [StringLength(30, ErrorMessage = "The last name field should have a maximum of 30 characters")]
+            [RegularExpression("^[\\w'\\-,.][^0-9_!¡?÷?¿/\\\\+=@#$%ˆ&*(){}|~<>;:[\\]]{2,}$", ErrorMessage = "Please enter your first name")]
+            // Regular expressions specify what can and can't be put in a field. This one for example prevents special characters such as '!','@', and numbers from being inputted into the field.
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
@@ -88,6 +94,8 @@ namespace AbstraxArtStore.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
+            [StringLength(30, ErrorMessage = "The first name field should have a maximum of 30 characters")]
+            [RegularExpression("^([a - zA - Z0 - 9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)| (([a - zA - Z0 - 9\\-] +\\.)+))([a - zA - Z]{ 2,4}|[0 - 9]{ 1,3})(\\]?)$", ErrorMessage = "Please enter a valid email address")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -96,7 +104,7 @@ namespace AbstraxArtStore.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(31, ErrorMessage = "Your password must be at least 6 characters and less than 30 charaters", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }

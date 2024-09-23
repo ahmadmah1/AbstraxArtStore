@@ -38,8 +38,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 new ApplicationUser
                 {
                     Id = "1",
-                    FirstName = "Admin",
-                    LastName = "Admin",
+                    FirstName = "Ahmad",
+                    LastName = "Mahmoud",
                     UserName = "admin@abstraxartstore.com",
                     NormalizedUserName = "ADMIN@ABSTRAXARTSTORE.COM",
                     Email = "admin@example.com",
