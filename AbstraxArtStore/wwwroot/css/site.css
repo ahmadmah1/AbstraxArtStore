@@ -27,6 +27,7 @@ html {
 
 
 body {
+    padding-top: 70px; /* Adjust based on your navbar height */
     margin-bottom: 60px;
     background-color: lightgray;
     height: 100%;
@@ -171,7 +172,6 @@ body {
 
 
     .footer {
-        background-color: black;
         text-align: center;
         padding: 10px;
     }
@@ -195,7 +195,7 @@ body {
     }
 
     h1 {
-        color: black;
+        color: white;
     }
 
     h5 {

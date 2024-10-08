@@ -2,7 +2,6 @@
     ViewData["Title"] = "Contact Us";
 }
 
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,16 +14,49 @@
             box-sizing: border-box;
         }
 
-        input[type=text], select, textarea {
+        .contact-info {
+            width: 100%; /* Full width for contact info */
+            background-color: #000000; /* Dark background */
+            color: white;
+            padding: 20px;
+            border-radius: 16px; /* Rounded corners */
+            text-align: center; /* Center align text */
+            margin-bottom: 20px; /* Space below contact info */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+        }
+
+        .form-container {
+            width: 100%; /* Full width for form container */
+            padding: 20px;
+            border-radius: 16px; /* Rounded corners */
+            background-color: #f8f9fa; /* Light background for form */
+            margin-bottom: 20px; /* Space below form */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px; /* Add space below rows */
+        }
+
+        input[type=text], input[type=email], select, textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box;
             margin-top: 6px;
-            margin-bottom: 16px;
             resize: vertical;
         }
+
+        .input-field {
+            flex: 1; /* Make inputs take equal space */
+            margin-right: 10px; /* Space between inputs */
+        }
+
+            .input-field:last-child {
+                margin-right: 0; /* Remove margin for the last input */
+            }
 
         input[type=submit] {
             background-color: #000;
@@ -36,46 +68,90 @@
         }
 
             input[type=submit]:hover {
-                background-color: #000;
+                background-color: #444;
             }
 
+        /* Placeholder color for input and select elements */
+        input::placeholder, textarea::placeholder, select {
+            color: #999; /* Grey color for placeholder */
+        }
 
+        select {
+            color: #000000; /* Grey color for select text */
+        }
+
+            select option {
+                color: #000; /* Black color for selected option */
+            }
+
+        .map-container {
+            width: 100%; /* Full width for map */
+            height: 400px; /* Set height for the map */
+            border-radius: 16px; /* Rounded corners for the map */
+            overflow: hidden; /* Ensure the iframe fits within the rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            margin-bottom: 20px; /* Space below the map */
+        }
+
+            .map-container iframe {
+                width: 100%; /* Full width for the map */
+                height: 100%; /* Full height for the map */
+                border: 0; /* No border */
+
+            }
     </style>
 </head>
 <body>
 
-    <div class="container p-5 my-5 bg-dark text-white rounded">
+    <div class="contact-info">
         <h1>Get in touch</h1>
         <h5>0212584962</h5>
         <h5>Contact@abstractart.nz</h5>
     </div>
 
+    <div class="form-container">
+        <form action="https://formspree.io/f/meoqjppo" method="POST">
+            <div class="form-row">
+                <div class="input-field">
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name..." required>
+                </div>
+                <div class="input-field">
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Your last name..." required>
+                </div>
+            </div>
 
-    <div class="container">
-        <form action="/action_page.php">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="Your name...">
+            <div class="form-row">
+                <div class="input-field">
+                    <label for="city">City</label>
+                    <select id="city" name="city" required>
+                        <option value="" disabled selected>Select your city...</option>
+                        <option value="auckland">Auckland</option>
+                        <option value="wellington">Wellington</option>
+                        <option value="christchurch">Christchurch</option>
+                        <option value="hamilton">Hamilton</option>
+                        <option value="dunedin">Dunedin</option>
+                        <option value="rotorua">Rotorua</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="input-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your email..." required>
+                </div>
+            </div>
 
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lastname" placeholder="Your last name...">
-
-            <label for="country">City</label>
-            <select id="city" name="city">
-                <option value="auckland">Auckland</option>
-                <option value="wellington">Wellington</option>
-                <option value="christchurch">Christchurch</option>
-                <option value="hamilton">Hamilton</option>
-                <option value="dunedin">Dunedin</option>
-                <option value="rotorua">Rotorua</option>
-                <option value="other">Other</option>
-            </select>
-
-            <label for="subject">Subject</label>
+            <label for="message">Message</label>
             <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
 
             <input type="submit" value="Send">
         </form>
     </div>
 
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.9400086220276!2d174.69069919999998!3d-36.8917834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d46cd23ece1e9%3A0x155b742ba8ca5862!2s51%20Victor%20Street%2C%20Avondale%2C%20Auckland%201026!5e0!3m2!1sen!2snz!4v1728356994103!5m2!1sen!2snz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    
 </body>
 </html>
