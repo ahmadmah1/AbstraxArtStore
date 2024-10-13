@@ -58,3 +58,27 @@ INSERT INTO [dbo].[AspNetUsers] ([Id], [CustomerId], [FirstName], [LastName], [U
 
 INSERT INTO [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'1', N'1')
 INSERT INTO [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'7d5e8adb-2162-45d3-bdd6-4042fbfeb7a3', N'1')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
