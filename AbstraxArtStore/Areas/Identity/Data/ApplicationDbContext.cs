@@ -28,11 +28,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
             });
 
+            // Seeds the role which is the admin role.
             builder.Entity<IdentityRole>().HasData(
                 new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" }
                 );
 
+            // Creates a password hasher.
             var harsher = new PasswordHasher<ApplicationUser>();
+
+            // Seeds the user table with an admin user.
             builder.Entity<ApplicationUser>().HasData(
 
                 new ApplicationUser
@@ -40,16 +44,18 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                     Id = "1",
                     FirstName = "Ahmad",
                     LastName = "Mahmoud",
-                    UserName = "admin@abstraxartstore.com",
+                    UserName = "admin@abstraxartstore.com", // Email
                     NormalizedUserName = "ADMIN@ABSTRAXARTSTORE.COM",
                     Email = "admin@example.com",
                     NormalizedEmail = "ADMIN@EXAMPLE.COM",
                     EmailConfirmed = true,
+                    // Password
                     PasswordHash = harsher.HashPassword(null, "Admin123")
                 }
 
             );
 
+            // Seeds the UserRoles table.
             builder.Entity<IdentityUserRole<string>>().HasData(
                 new IdentityUserRole<string> { RoleId = "1", UserId = "1" }
             );

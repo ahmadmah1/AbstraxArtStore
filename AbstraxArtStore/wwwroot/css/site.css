@@ -27,7 +27,7 @@ html {
 
 
 body {
-    padding-top: 70px; /* Adjust based on your navbar height */
+    padding-top: 100px; /* Adjust based on your navbar height */
     margin-bottom: 60px;
     background-color: lightgray;
     height: 100%;
@@ -53,7 +53,7 @@ body {
     .LearnMore h1 {
         font-size: 80px;
         font-family: "Lucida Console", monospace;
-        color: #ffffff; /* White text */
+        color: #ffffff;
     }
 
     .LearnMore p {
@@ -63,87 +63,77 @@ body {
         margin-bottom: 20px;
     }
 
-/* Button */
+
 .button {
-    background-color: #ffffff; 
-    border: 2px solid #ffffff;
-    padding: 10px 30px;
+    background-color: #ffffff; /* Background colour */
+    border: 2px solid #ffffff; /* size and style of the border */
+    padding: 10px 30px; /* Creates padding inside the button */
     text-decoration: none;
     font-size: 30px;
-    font-family: "Lucida Console", monospace;
-    color: #000000; 
-    transition: background-color 0.3s ease, color 0.3s ease; /*Hover affect*/
+    font-family: "Lucida Console", monospace; /* Font family (font of the text) */
+    color: #000000; /* Colour of the text */
+    transition: background-color 0.3s ease, color 0.3s ease; /* This makes the colour change in a period of 0.3s instead of automatically changing.*/
 }
 
     .button:hover {
-        background-color: #000000;
-        color: #ffffff; 
-        border: 2px solid #ffffff; 
+        background-color: #000000; /* Colour changes to black on hover */
+        color: #ffffff; /* Text colour changes to white on hover */
+        border: 2px solid #ffffff;
     }
 
 
 
 
 
-
-
-body {
-    background-color: #f8fafc;
-}
-
-.container {
-    padding: 2rem;
-}
-
 .slider-wrapper {
     position: relative;
-    max-width: 48rem;
-    margin: 0 auto;
+    max-width: 70rem; /* Maximum width of the carousel */
+    margin: 0 auto; /* Carousel positioning */
 }
 
 .slider {
-    display: flex;
-    aspect-ratio: 16 / 9;
+    display: flex; /* Flexbox */
+    aspect-ratio: 16/ 9; /* Ensures that the shape of the carousel remains with an aspect ratio 0f 16/9 */
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
-    border-radius: 0.5rem;
-    -ms-overflow-style: none; /* Hide scrollbar IE and Edge */
-    scrollbar-width: none; /* Hide scrollbar Firefox */
+    box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25); /* Shadow effect behind the carousel */
+    border-radius: 0.5rem; /* Rounds the corners */
+    -ms-overflow-style: none; /* Prevents a scrollbar from appearing */
+    scrollbar-width: none; /* Prevents a scrollbar from appearing */
 }
 
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .slider::-webkit-scrollbar {
+    /* Prevents a scrollbar from appearing */
+    .slider::-webkit-scrollbar { 
         display: none;
     }
 
     .slider img {
-        flex: 1 0 100%;
+        flex: 1 0 100%; /* Image sizing */
         scroll-snap-align: start;
-        object-fit: cover;
+        object-fit: cover; /* Covers the entire area of the image */
     }
 
-.slider-nav {
-    display: flex;
-    column-gap: 1rem;
-    position: absolute;
+.sliderNav {
+    display: flex; /* Flexbox for the dots on the bottom of the carousel */
+    column-gap: 1rem; /* Spacing */
+    position: absolute; /* Gives the dots spacing between the bottom of the carousel */
     bottom: 1.25rem;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1;
+    z-index: 1; /* Makes the dots to be placed above other elements on the carousel */
 }
 
-    .slider-nav a {
+    .sliderNav a {
         width: 0.5rem;
         height: 0.5rem;
-        border-radius: 50%;
+        border-radius: 50%; /* Makes the dots circular */
         background-color: #fff;
-        opacity: 0.75;
+        opacity: 0.75; /* Transparency */
         transition: opacity ease 250ms;
     }
 
-        .slider-nav a:hover {
+        .sliderNav a:hover {
             opacity: 1;
         }
 
@@ -154,21 +144,29 @@ body {
 
 
 
+
+
+
+
+
+
+
+
+
 .column {
-    margin-top: 50px; /* Adjust the margin size as needed */
+    margin-top: 50px; /* determines the size of the margin */
     float: left;
-    width: 33.33%;
+    width: 33.33%; /* A column can only take up 33.33% of a row */
     padding: 15px;
     text-align: center;
-
 }
 
     .column img {
         width: 100%;
         height: auto;
-        max-height: 600px; /* Make it a rectangular portrait shape */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the minimalistic effect */
-        border-radius: 20px; /* Optional: Gives rounded corners */
+        max-height: 600px; /* Makes the column a rectangular portrait shape */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+        border-radius: 20px; /* Makes the corners round */
 
     }
 
@@ -184,32 +182,65 @@ h2 {
     margin-top: 15px;
 }
 
+/* Responsiveness to make the content visible on smaller screens */
 @media screen and (max-width: 768px) {
     .column {
-        width: 100%;
+        width: 100%; /* If the screen is small, the column will take up the whole width of the screen */
     }
 }
+
 
 
 
 .Column-Heading {
-    text-align: center; /* Center the text */
-    font-size: 40px;
-    font-family: "Lucida Console", monospace;
-    color: white; /* Change text color as needed */
-    margin-top: 10px; /* Space between image and text */
+    text-align: center; /* Centers the text */
+    font-family: 'Lucida Console', monospace; /* Font family (font of the text) */
+    color: white; /* Text colour */
+    margin-top: 10px; /* Space between the image and text */
+    font-size: 24px;
 }
 
-/* Responsive Font Size */
+/* Responsiveness for the text size */
 @media screen and (max-width: 768px) {
     .image-title {
-        font-size: 1rem; /* Smaller font size for smaller screens */
+        font-size: 20px; /* Text size adjusts to 20px when on a smaller screen */
+    }
+}
+
+
+/* Responsiveness for the text size */
+@media screen and (max-width: 768px) {
+    .image-title {
+        font-size: 1rem; /* Text size adjusts to 1rem when on a smaller screen */
     }
 }
 
 
 
 
+
+.AboutUs {
+    background-color: black;
+    border-radius: 12px;
+    padding: 15px;
+    color: white;
+    font-family: 'Lucida Console', monospace; /* Font family (font of the text) */
+    margin-bottom: 20px; /* Margin below the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+
+}
+
+@media (max-width: 991px) {
+    .right-image {
+        max-height: 400px;
+    }
+
+    .AboutUs {
+        margin-bottom: 15px;
+    }
+}
 
 
 
@@ -240,9 +271,11 @@ h2 {
         border: lightgray solid 1px;
     }
 
-    h1 {
-        color: black;
-    }
+/* General styling for text sizes and buttons */
+h1 {
+    color: black;
+    font-family: 'Lucida Console', monospace; /* Font family (font of the text) */
+}
 
     h5 {
         color: white;

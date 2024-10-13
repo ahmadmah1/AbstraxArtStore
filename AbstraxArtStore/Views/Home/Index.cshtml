@@ -13,7 +13,7 @@
     <!-- Content for the special page -->
 </body>
 
-<section class="LearnMore"> 
+<section class="LearnMore">  <!-- Defines a class to allow for CSS modifications.-->
     <div class="content"> 
         <h1>Welcome to Abstrax Art</h1>
         <p>Explore the world of art and creativity</p> 
@@ -24,44 +24,61 @@
 <section class="container">
     <div class="slider-wrapper">
         <div class="slider">
-            <img id="slide-1" src="~/lib/images/photo-1586023492125-27b2c045efd7.png" alt="slide 1" style="width:1200px;height:650px;" />
-            <img id="slide-2" src="/lib/images/Couch.png" alt="slide 2" style="width:1200px;height:650px;" />
-            <img id="slide-3" src="/lib/images/Couch2.png" alt="slide 3" style="width:1200px;height:650px;" />
+            <img id="slide-1" src="/lib/images/Living Room 7.jpeg" alt="slide 1" /> <!-- Image files which are located in a www.root folder -->
+            <img id="slide-2" src="/lib/images/Living Room 9.jpeg" alt="slide 2" /> <!-- Image files which are located in a www.root folder -->
+            <img id="slide-3" src="/lib/images/Mockup 1.jpeg" alt="slide 3" /> <!-- Image files which are located in a www.root folder -->
         </div>
-        <div class="slider-nav">
+        <div class="sliderNav">
+            <a href="#slide-1" data-slide="0"></a>
+            <a href="#slide-2" data-slide="1"></a>
+            <a href="#slide-3" data-slide="2"></a>
+        </div>
+        <div class="sliderNav">
             <a href="#slide-1"></a>
             <a href="#slide-2"></a>
             <a href="#slide-3"></a>
+
+            <script>
+                const slider = document.querySelector('.slider');
+                const slides = document.querySelectorAll('.slider img');
+                let currentSlide = 0; // Displayed slide
+
+                function showNextSlide() {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slider.scrollTo({
+                        left: slides[currentSlide].offsetLeft,
+                        behavior: 'smooth'
+                    }); // This causes the carousel to smoothly switch between slides. When it reaches the end of the cycle, it cycles back to the beginning.
+                }
+
+                setInterval(showNextSlide, 3000); // Creates an interval which changes the slide/image every 3 seconds.
+            </script> 
+            <!-- This javascript code makes the carousel function by itself and automactially switch between slides.-->
+
         </div>
-
-
 </section>
 
-
-
-
-
-
-    <div class="row">
+<!-- Three image links below the carousel on the home page. -->
+    <div class="row"> 
         <div class="column">
-            <a href="Home/Smallpaintings">
-                <img src="/lib/images/Living Room 6.jpeg" alt="Small Paintings">
+        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About"> <!-- Defines to which page the image will link to. -->
+            <img src="/lib/images/Living Room 6.jpeg" alt="Small Paintings"> <!-- Image files which are located in a www.root folder, along with an alternative text which will show up if the image is unable to be displayed. -->
             </a>
         <h2 class="Column-Heading">About Us</h2>
 
         </div>
 
         <div class="column">
-            <a href="Home/Mediumpaintings">
-                <img src="/lib/images/Office 2.jpeg" alt="Medium Paintings">
+        <a class="nav-link text-light" asp-area="" asp-controller="Products" asp-action=""> <!-- Defines to which page the image will link to. -->
+            <img src="/lib/images/Mockup 2.jpeg" alt="Medium Paintings"> <!-- Image files which are located in a www.root folder, along with an alternative text which will show up if the image is unable to be displayed. -->
             </a>
-        <h2 class="Column-Heading">All Products</h2>
+        <h2 class="Column-Heading">All Products</h2> 
 
         </div>
 
         <div class="column">
-            <a href="Home/Largepaintings">
-                <img src="/lib/images/Office 1.jpeg" alt="Large Paintings">
+        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Contact"> <!-- Defines to which page the image will link to. -->
+            <img src="/lib/images/Office 1.jpeg" alt="Large Paintings"> <!-- Image files which are located in a www.root folder, along with an alternative text which will show up if the image is unable to be displayed. -->
             </a>
         <h2 class="Column-Heading">Contact Us</h2>
 

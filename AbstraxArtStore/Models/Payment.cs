@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AbstraxArtStore.Models
 {
-    public enum PaymentM
+    public enum PaymentM // This defines the values that will be from the options a user can select. It defines the name PaymentM (below), which creates the options.
     {
         [Display(Name = "Credit")]
         Credit,
@@ -19,7 +19,7 @@ namespace AbstraxArtStore.Models
     public class Payment
     {
         [Required]
-        [Key] public int PaymentId { get; set; }
+        [Key] public int PaymentId { get; set; } // Primary key
 
         [Required]
         [DisplayName("Order Name")]
@@ -30,7 +30,7 @@ namespace AbstraxArtStore.Models
         // The '7' refers to the total amount of digits allowed and the '2' refers to the total amount of digits allowed after the decimal point.
         [Required(ErrorMessage = "Please enter a payment amount")]
         [Column(TypeName = "decimal(7,2)")]
-        [Display(Name = "Product Price")]
+        [Display(Name = "Order total")]
         [RegularExpression("^[$]?[0-9]*(\\.)?[0-9]?[0-9]?$", ErrorMessage = "Please input a valid payment amount")]
 
 
@@ -43,15 +43,16 @@ namespace AbstraxArtStore.Models
 
         public PaymentM PaymentMethod { get; set; }
 
-        [Display(Name = "Payment Date")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Payment Date")] // This attribute specifies the property name on the view.
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)] // This attribute formats the date to be in a day/month/year form.
         public DateTime PaymentDate { get; set; }
         public Payment()
         {
-            PaymentDate = DateTime.Now;
+            PaymentDate = DateTime.Now; // Automatically sets the date to when the record was submitted.
         }
+        // Server side C#.
 
-        public Order order { get; set; }
+        public Order order { get; set; } // This foreign key ensures that an order can have many payments with the same information (one-to-many).
 
 
 

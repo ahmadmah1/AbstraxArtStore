@@ -23,10 +23,47 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Carts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
-            var applicationDbContext = _context.Cart.Include(c => c.Order);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var carts = from s in _context.Cart
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                carts = carts.Where(s => s.FullName.Contains(searchString));
+                                       
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    carts = carts.OrderByDescending(s => s.FullName);
+                    break;
+                case "Date":
+                    carts = carts.OrderBy(s => s.FullName);
+                    break;
+
+            }
+            int pageSize = 10;
+            return View(await PaginatedList<Cart>.CreateAsync(carts.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await carts.AsNoTracking().ToListAsync());
         }
 
         // GET: Carts/Details/5

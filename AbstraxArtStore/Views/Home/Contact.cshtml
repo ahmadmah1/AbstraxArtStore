@@ -13,37 +13,37 @@
         }
 
         .contact-info {
-            width: 100%; /* Full width for contact info */
-            background-color: #000000; /* Dark background */
-            color: white;
-            padding: 20px;
-            border-radius: 16px; /* Rounded corners */
-            text-align: center; /* Center align text */
+            width: 100%; /* defines that the container should be the full width. */
+            background-color: #000000; /* Background colour */
+            color: white; /* Text colour*/
+            padding: 20px; /* Creates space between the container and other elements */
+            border-radius: 16px; /* Makes the corners round */
+            text-align: center; /* Center aligns the text */
             margin-bottom: 20px; /* Space below contact info */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Gives the container a shadow effect */
         }
 
         .form-container {
-            width: 100%; /* Full width for form container */
+            width: 100%; /* defines that the container should be the full width. */
             padding: 20px;
-            border-radius: 16px; /* Rounded corners */
-            background-color: #f8f9fa; /* Light background for form */
-            margin-bottom: 20px; /* Space below form */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            border-radius: 16px; /* Makes the corners round */
+            background-color: #f8f9fa; /* Background colour */
+            margin-bottom: 20px; /* Creates a space below the form */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Gives the form a shadow effect around it */
         }
 
         .form-row {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Spaces out the content*/
             margin-bottom: 16px; /* Add space below rows */
         }
 
         input[type=text], input[type=email], select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-top: 6px;
+            width: 100%; /* Full width */
+            padding: 12px; /* padding for the fields in the form */
+            border: 1px solid #ccc; /* Border colour */
+            border-radius: 4px; /* Makes the corners round */
+            margin-top: 6px; /* Creates a space above */
             resize: vertical;
         }
 
@@ -69,21 +69,21 @@
                 background-color: #444;
             }
 
-        /* Placeholder color for input and select elements */
+
         input::placeholder, textarea::placeholder, select {
-            color: #999; /* Grey color for placeholder */
+            color: #999; /* Grey colour for placeholder */
         }
 
         select {
-            color: #000000; /* Grey color for select text */
+            color: #000000; /* Grey colour for select text */
         }
 
             select option {
-                color: #000; /* Black color for selected option */
+                color: #000; /* Black colour for selected options */
             }
 
         .map-container {
-            width: 100%; /* Full width for map */
+            width: 100%; /* defines that the map should be the full width. */
             height: 400px; /* Set height for the map */
             border-radius: 16px; /* Rounded corners for the map */
             overflow: hidden; /* Ensure the iframe fits within the rounded corners */
@@ -92,9 +92,9 @@
         }
 
             .map-container iframe {
-                width: 100%; /* Full width for the map */
+                width: 100%; /* defines that the map should be the full width. */
                 height: 100%; /* Full height for the map */
-                border: 0; /* No border */
+                border: 0; 
 
             }
     </style>
@@ -102,25 +102,30 @@
 <body>
 
     <div class="contact-info">
-        <h2>Get in touch</h2>
+        <h1 class="text-light">Get in touch</h1>
         <h5>0212584962</h5>
         <h5>Contact@abstractart.nz</h5>
     </div>
 
     <div class="form-container">
-        <form action="https://formspree.io/f/meoqjppo" method="POST">
+        <form action="https://formspree.io/f/meoqjppo" method="POST"> <!-- This sends the completed form to the formspree website so it can be processed. -->
+
+            <!-- First name and last name fields -->
             <div class="form-row">
                 <div class="input-field">
+                    <!-- Information for the First name field including the display name and placeholder value -->
                     <label for="fname">First Name</label>
                     <input type="text" id="fname" name="firstname" placeholder="Your name..." required>
                 </div>
                 <div class="input-field">
+                    <!-- Information for the First name field including the display name and placeholder value -->
                     <label for="lname">Last Name</label>
                     <input type="text" id="lname" name="lastname" placeholder="Your last name..." required>
                 </div>
             </div>
 
             <div class="form-row">
+                <!-- Creates drop-down and specificies all the options -->
                 <div class="input-field">
                     <label for="city">City</label>
                     <select id="city" name="city" required>
@@ -134,19 +139,20 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
+                <!-- Email field -->
                 <div class="input-field">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Your email..." required>
                 </div>
             </div>
-
+            <!-- Message field -->
             <label for="message">Message</label>
             <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
+            <!-- Submit button -->
             <input type="submit" value="Send">
         </form>
     </div>
-
+    <!-- Container for the map and the embed map link.  -->
     <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.9400086220276!2d174.69069919999998!3d-36.8917834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d46cd23ece1e9%3A0x155b742ba8ca5862!2s51%20Victor%20Street%2C%20Avondale%2C%20Auckland%201026!5e0!3m2!1sen!2snz!4v1728356994103!5m2!1sen!2snz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>

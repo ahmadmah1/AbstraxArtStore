@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbstraxArtStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240919075645_Categories")]
-    partial class Categories
+    [Migration("20241012032439_Admin")]
+    partial class Admin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,20 +107,20 @@ namespace AbstraxArtStore.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "09c4b929-766b-4cef-99a7-64d7c5937f19",
+                            ConcurrencyStamp = "b95ac998-b7cd-409f-ad13-c30325e8f47d",
                             CustomerId = 0,
                             Email = "admin@example.com",
                             EmailConfirmed = true,
-                            FirstName = "Admin",
-                            LastName = "Boss",
+                            FirstName = "Ahmad",
+                            LastName = "Mahmoud",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELMq5BnySrEde8mXkB0GJFScj0Hj/pyxAQBPEtIHULQA7B9jaICkuswZFTe22j+qUw==",
+                            NormalizedUserName = "ADMIN@ABSTRAXARTSTORE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH9UY2wYhWZmfY8HlTIy7FbnfotKrcFz+QOWINJtd+zZcHpFcE7M3qjFSBoYYyZD2g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d2474036-9ea4-47a1-9c56-58f3a8bb4551",
+                            SecurityStamp = "cae46cd4-89e8-425e-8270-0485b594db3b",
                             TwoFactorEnabled = false,
-                            UserName = "admin@example.com"
+                            UserName = "admin@abstraxartstore.com"
                         });
                 });
 
@@ -207,10 +207,8 @@ namespace AbstraxArtStore.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
 
                     b.HasKey("PaymentId");
 
@@ -232,7 +230,7 @@ namespace AbstraxArtStore.Migrations
 
                     b.Property<string>("ImageName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ProductDesc")
                         .IsRequired()

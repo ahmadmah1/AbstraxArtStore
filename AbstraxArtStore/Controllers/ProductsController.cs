@@ -28,21 +28,26 @@ public async Task<IActionResult> Index(
     string currentFilter,
     string searchString,
     int? pageNumber)
+            // Types of sorting parameters
         {
     ViewData["CurrentSort"] = sortOrder;
     ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
     ViewData["ProductdescSortParm"] = sortOrder == "productdesc" ? "productdesc_desc" : "productdesc";
+            //Puts the page back to 1 if a search is inputted.
             if (searchString != null)
             {
                 pageNumber = 1;
             }
             else
             {
+                // If nothing matches, the page will remain the same.
                 searchString = currentFilter;
             }
             ViewData["CurrentFilter"] = searchString;
+            // Query to get the products
     var products = from s in _context.Product
                    select s;
+            // Filters the products to show what was searched
             if (!String.IsNullOrEmpty(searchString))
             {
                 products = products.Where(s => s.ProductName.Contains(searchString)
@@ -50,7 +55,9 @@ public async Task<IActionResult> Index(
             }
             switch (sortOrder)
     {
+                // Specifies the sort order
         case "name_desc":
+                // Orders by descending
             products = products.OrderByDescending(s => s.ProductName);
             break;
         case "productdesc":
@@ -63,7 +70,8 @@ public async Task<IActionResult> Index(
             products = products.OrderBy(s => s.ProductName);
             break;
     }
-            int pageSize = 5;
+            // Size of the page
+            int pageSize = 10;
             return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
             return View(await products.AsNoTracking().ToListAsync());
 }
@@ -87,7 +95,7 @@ public async Task<IActionResult> Index(
         }
 
         // GET: Products/Create
-        [Authorize]
+        [Authorize] // Doesn't allow anyone to create a new product unless they are logged in.
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName");
@@ -123,7 +131,7 @@ public async Task<IActionResult> Index(
         }
 
         // GET: Products/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")] // Doesn't allow anyone to create a new product unless they are logged in as an admin.
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Product == null)
@@ -177,7 +185,7 @@ public async Task<IActionResult> Index(
         }
 
         // GET: Products/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")] // Doesn't allow anyone to create a new product unless they are logged in as an admin.
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Product == null)

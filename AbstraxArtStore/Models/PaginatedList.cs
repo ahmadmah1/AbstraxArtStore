@@ -13,19 +13,24 @@ namespace AbstraxArtStore
 
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {
+            // Sets the current page
             PageIndex = pageIndex;
+            // Calculates the total pages. To do this, it considers the number of items and the page size.
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
 
             this.AddRange(items);
         }
 
+        // Previous page
         public bool HasPreviousPage => PageIndex > 1;
 
+        // Next page
         public bool HasNextPage => PageIndex < TotalPages;
 
         public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
         {
             var count = await source.CountAsync();
+            // Retrieves the items on the current page.
             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }

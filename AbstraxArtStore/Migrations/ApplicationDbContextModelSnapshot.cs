@@ -104,18 +104,18 @@ namespace AbstraxArtStore.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4d7adc02-daa5-4a95-853d-f56d4ea84c0d",
+                            ConcurrencyStamp = "b95ac998-b7cd-409f-ad13-c30325e8f47d",
                             CustomerId = 0,
                             Email = "admin@example.com",
                             EmailConfirmed = true,
-                            FirstName = "Admin",
-                            LastName = "Boss",
+                            FirstName = "Ahmad",
+                            LastName = "Mahmoud",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@ABSTRAXARTSTORE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENRRpgdz0R00CrON7U+xnbjq1IoBclFdhS0AzdRBXc/mjCIKBEIBLLiQnWxgk/WZ4g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH9UY2wYhWZmfY8HlTIy7FbnfotKrcFz+QOWINJtd+zZcHpFcE7M3qjFSBoYYyZD2g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f67be447-7d04-44e9-b565-f5e4e4da9d95",
+                            SecurityStamp = "cae46cd4-89e8-425e-8270-0485b594db3b",
                             TwoFactorEnabled = false,
                             UserName = "admin@abstraxartstore.com"
                         });
@@ -176,8 +176,8 @@ namespace AbstraxArtStore.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
@@ -205,7 +205,6 @@ namespace AbstraxArtStore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PaymentMethod")
-                        .HasMaxLength(15)
                         .HasColumnType("int");
 
                     b.HasKey("PaymentId");

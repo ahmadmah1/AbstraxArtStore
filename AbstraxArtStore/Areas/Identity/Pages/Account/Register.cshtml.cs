@@ -95,8 +95,8 @@ namespace AbstraxArtStore.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             [StringLength(30, ErrorMessage = "The first name field should have a maximum of 30 characters")]
-            [RegularExpression("^([a - zA - Z0 - 9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)| (([a - zA - Z0 - 9\\-] +\\.)+))([a - zA - Z]{ 2,4}|[0 - 9]{ 1,3})(\\]?)$", ErrorMessage = "Please enter a valid email address")]
             [Display(Name = "Email")]
+            [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")] // Ensures that the email is in a valid email address format.
             public string Email { get; set; }
 
             /// <summary>

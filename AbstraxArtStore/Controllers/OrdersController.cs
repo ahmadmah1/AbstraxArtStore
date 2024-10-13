@@ -23,12 +23,49 @@ namespace AbstraxArtStore.Controllers
         }
 
         // GET: Orders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
-              return _context.Order != null ? 
-                          View(await _context.Order.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Order'  is null.");
-        }
+
+    ViewData["CurrentSort"] = sortOrder;
+    ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+    ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var orders = from s in _context.Order
+                   select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                orders = orders.Where(s => s.FullName.Contains(searchString));
+                                       
+            }
+            switch (sortOrder)
+    {
+        case "name_desc":
+            orders = orders.OrderByDescending(s => s.FullName);
+            break;
+        case "Date":
+            orders = orders.OrderBy(s => s.FullName);
+            break;
+
+    }
+            int pageSize = 10;
+            return View(await PaginatedList<Order>.CreateAsync(orders.AsNoTracking(), pageNumber ?? 1, pageSize));
+
+            return View(await orders.AsNoTracking().ToListAsync());
+}
 
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)

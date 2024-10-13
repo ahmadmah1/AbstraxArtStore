@@ -8,7 +8,7 @@ namespace AbstraxArtStore.Models
     public class Cart
     {
         [Required]
-        [Key] public int CartId { get; set; }
+        [Key] public int CartId { get; set; } // Primary key
 
 
         [Required]
@@ -19,23 +19,23 @@ namespace AbstraxArtStore.Models
 
 
 
-        [Required(ErrorMessage = "Please enter your full name"), MaxLength(25)]
-        [DisplayName("Full Name")]
-        [DataType(DataType.Text)]
-        [RegularExpression("^([a-zA-Z]+[\\'\\,\\.\\-]?[a-zA-Z ]*)+[ ]([a-zA-Z]+[\\'\\,\\.\\-]?[a-zA-Z ]+)+$", ErrorMessage = "Please enter your full name")]
-        // Regular expressions specify what can and can't be put in a field. This one for example prevents special characters such as '!','@' and numbers along with single names from being inputted into the field.
+        [Required(ErrorMessage = "Please enter your preferred name for the order"), // This attribute will make an error message display if the user attempts to skip the field.
+        MaxLength(25)] // This attribute ensures that the length of the string does not exceed 25 characters.
+        [DisplayName("Preferred order name")] // This attribute specifies the property name on the view.
+        [DataType(DataType.Text)] // The type of data for this field is text.
+
         public string FullName { get; set; }
 
 
 
-        [Required(ErrorMessage = "Please enter the amount of products"), Range(1, 100)]
+        [Required(ErrorMessage = "Please enter the amount of products"), Range(1, 100)] // This attribute sets a range between two numbers.
         [DisplayName("quantity")]
         public int quantity { get; set; }
 
 
-        public Order Order { get; set; }
+        public Order Order { get; set; } // This foreign key ensures that an order can have many carts with the same information (one-to-many).
 
-        
+
 
     }
     }
